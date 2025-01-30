@@ -20,9 +20,15 @@ const deleteTask = (id, callback) => {
   db.query(query, [id], callback);
 };
 
+const toggleTaskCompletion = (taskId, isCompleted, callback) => {
+  const query = 'UPDATE tasks SET is_completed = ? WHERE id = ?';
+  db.query(query, [isCompleted, taskId], callback);
+};
+
 module.exports = {
   createTask,
   getTasksByUser,
   updateTask,
   deleteTask,
+  toggleTaskCompletion
 };

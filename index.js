@@ -15,6 +15,12 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 
+console.log("App started successfully!");
+app.get("/", (req, res) => {
+  console.log("Request received at /");
+  res.send("Hello, Vercel!");
+});
+
 
 db.connect((err) => {
     if (err) {

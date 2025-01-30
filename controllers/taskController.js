@@ -1,4 +1,4 @@
-const { createTask, getTasksByUser, updateTask, deleteTask } = require('../models/taskModel');
+const { createTask, getTasksByUser, updateTask, deleteTask ,toggleTaskCompletion } = require('../models/taskModel');
 
 const addTask = (req, res) => {
   const { name, description } = req.body;
@@ -51,4 +51,16 @@ const removeTask = (req, res) => {
   });
 };
 
-module.exports = { addTask, getTasks, editTask, removeTask };
+
+const toogetTask=(req,res)=>{
+  const { id } = req.params;
+    const { is_completed } = req.body; // Expecting a boolean value
+
+    toggleTaskCompletion(id, is_completed, (err, result) => {
+        if (err) return res.status(500).json({ error: err.message });
+
+        res.json({ message: 'Task updated successfully', is_completed });
+    });
+}
+
+module.exports = { addTask, getTasks, editTask, removeTask ,toogetTask };
